@@ -1,0 +1,23 @@
+{
+  "name": "whchi/laravel-application-insights",
+  "description": "send log into Microsoft application insights",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "whchi",
+      "email": "whccchi@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=7.1",
+    "laravel/framework": "5.5.*",
+    "microsoft/application-insights": "^0.4.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Whchi\\LaravelApplicationInsights\\": "src/"
+    }
+  }
+}
