@@ -50,8 +50,8 @@ add event listener
 trigger event queue
 ```php
 $appInsightsObj = \App::make('AppInsights');
-$appInsightObj->setException(['exception' => $exception]);
-event(new \App\Events\AppInsightsLogEvent($appInsightObj));
+$appInsightsObj->setException(['exception' => new \Exception('exception'), 'created_at' => \Carbon\Carbon::now()]);
+event(new \App\Events\AppInsightsLogEvent($appInsightsObj));
 ```
 
 # Usage
