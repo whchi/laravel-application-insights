@@ -132,6 +132,7 @@ AppInsights::send();
 ```
 #### metric
 自訂義的衡量標準，比如說在程式執行速度或是經過的class數量等，`stdDev`為標準差
+
 | type | 描述        |
 | :--- | :---------- |
 | 0    | Measurement |
