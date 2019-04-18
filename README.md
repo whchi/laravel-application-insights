@@ -3,23 +3,19 @@ A wrapper of [ApplicationInsights-PHP](https://github.com/Microsoft/ApplicationI
 Reference: [ms-application-insights-laravel](https://github.com/Marchie/ms-application-insights-laravel)
 
 # Installation
-1. setup repo uri
-```bash
-composer config repositories.appinsights vcs https://github.com/whchi/laravel-application-insights.git
-```
-2. require package
+1. require package
 ```bash
 composer require whchi/application-insights
 ```
-3. add ServiceProvider in `config/php`
+2. add ServiceProvider in `config/php`
 ```text
 Whchi\LaravelApplicationInsights\AppInsightsServiceProvider::class
 ```
-4. publish vendor
+3. publish vendor
 ```bash
 php artisan vendor:publish --provider="Whchi\LaravelApplicationInsights\AppInsightsServiceProvider"
 ```
-5. setup config `config/appinsights.php`
+4. setup config `config/appinsights.php`
 ```php
 return [
     'instrumentationKey' => 'find it on Microsoft Azure portal (https://portal.azure.com)'
@@ -27,7 +23,7 @@ return [
 ];
 
 ```
-6. start use
+5. start use
 * with facade
 ```php
 'aliases' => [
