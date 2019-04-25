@@ -7,15 +7,11 @@ Reference: [ms-application-insights-laravel](https://github.com/Marchie/ms-appli
 ```bash
 composer require whchi/application-insights
 ```
-2. add ServiceProvider in `config/php`
-```text
-Whchi\LaravelApplicationInsights\AppInsightsServiceProvider::class
-```
-3. publish vendor
+2. publish vendor
 ```bash
 php artisan vendor:publish --provider="Whchi\LaravelApplicationInsights\AppInsightsServiceProvider"
 ```
-4. setup config `config/appinsights.php`
+3. setup config `config/appinsights.php`
 ```php
 return [
     'instrumentationKey' => 'find it on Microsoft Azure portal (https://portal.azure.com)'
@@ -23,7 +19,7 @@ return [
 ];
 
 ```
-5. start use
+4. start use
 * with facade
 ```php
 'aliases' => [
