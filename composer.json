@@ -19,5 +19,15 @@
     "psr-4": {
       "Whchi\\LaravelApplicationInsights\\": "src/"
     }
+  },
+  "extra": {
+      "laravel": {
+          "providers": [
+              "Whchi\\LaravelApplicationInsights\\AppInsightsServiceProvider"
+          ],
+          "aliases": {
+              "AppInsights": "Whchi\\LaravelApplicationInsights\\Facades"
+          }
+      }
   }
 }
