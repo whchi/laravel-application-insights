@@ -12,6 +12,7 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=7.1",
+    "laravel/framework": "^5.*",
     "microsoft/application-insights": "^0.4.4"
   },
   "autoload": {
