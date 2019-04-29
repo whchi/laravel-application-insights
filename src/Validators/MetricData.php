@@ -10,13 +10,11 @@ class MetricData extends CommonHelper
     protected function validateOptionalData(array $data): void
     {
         if (isset($data['properties'])) {
-            array_walk(
-                $data['properties'], function ($ele) {
-                    if (is_array($ele)) {
-                        throw new TelemetryDataFormatException('"properties" should be 1D array', $this->class);
-                    }
+            foreach ($data['properties'] as $ele) {
+                if (is_array($ele)) {
+                    throw new TelemetryDataFormatException('"properties" should be 1D array', $this->class);
                 }
-            );
+            }
         }
         if (isset($data['type'])) {
             if (!is_int($data['type'])) {

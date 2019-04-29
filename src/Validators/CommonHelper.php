@@ -18,12 +18,10 @@ abstract class CommonHelper implements Validator
 
     public function validate(array $data, array $required): void
     {
-        $this->validateRequired($data, array_keys($required));
-        array_walk(
-            $required, function ($ele, $idx) use ($data) {
-                $this->validateRequiredByType($data[$idx], $ele);
-            }
-        );
+        $this->validateRequired($data, $required);
+        foreach ($required as $idx => $ele) {
+            $this->validateRequiredByType($data[$idx], $ele);
+        }
         $this->validateOptionalData($data);
     }
 
@@ -50,7 +48,8 @@ abstract class CommonHelper implements Validator
 
     private function validateRequired(array $data, array $required): void
     {
-        if (!array_has($data, $required)) {
+        $compared = array_intersect_key($required, $data);
+        if ($compared !== $required) {
             throw new TelemetryDataFormatException('field "' . implode('","', $required) . '" are required', $this->class);
         }
     }

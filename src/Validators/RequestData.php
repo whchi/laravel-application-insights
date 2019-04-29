@@ -26,25 +26,21 @@ class RequestData extends CommonHelper
             }
         }
         if (isset($data['properties'])) {
-            array_walk(
-                $data['properties'], function ($ele) {
-                    if (is_array($ele)) {
-                        throw new TelemetryDataFormatException('"properties" should be 1D array', $this->class);
-                    }
+            foreach ($data['properties'] as $ele) {
+                if (is_array($ele)) {
+                    throw new TelemetryDataFormatException('"properties" should be 1D array', $this->class);
                 }
-            );
+            }
         }
         if (isset($data['measurments'])) {
-            array_walk(
-                $data['measurments'], function ($ele) {
-                    if (is_array($ele)) {
-                        throw new TelemetryDataFormatException('"measurments" should be 1D array', $this->class);
-                    }
-                    if (!is_float($ele)) {
-                        throw new TelemetryDataFormatException('elements of "measurments" should be float type', $this->class);
-                    }
+            foreach ($data['measurments'] as $ele) {
+                if (is_array($ele)) {
+                    throw new TelemetryDataFormatException('"measurments" should be 1D array', $this->class);
                 }
-            );
+                if (!is_float($ele)) {
+                    throw new TelemetryDataFormatException('elements of "measurments" should be float type', $this->class);
+                }
+            }
         }
     }
 }
