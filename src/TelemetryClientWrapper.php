@@ -67,7 +67,7 @@ class TelemetryClientWrapper
      * @param string $name
      * @return void
      */
-    public function setOperation(string $id, string $name)
+    public function setOperationCtx(string $id, string $name)
     {
         $this->context->getOperationContext()->setId($id);
         $this->context->getOperationContext()->setName($name);

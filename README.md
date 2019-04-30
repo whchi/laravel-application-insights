@@ -51,6 +51,10 @@ event(new \App\Events\AppInsightsLogEvent($appInsightsObj));
 ### use native methods
 see: [ApplicationInsights-PHP](https://github.com/Microsoft/ApplicationInsights-PHP)
 ### use wrap method
+### 設定 operation context (MUST)
+```php
+AppInsights::setOperationCtx('$id', '$name');
+```
 #### 設定ip
 ```php
 AppInsights::setIp('127.0.0.1');
@@ -64,8 +68,6 @@ AppInsights::setLocale('zh-TW');
 ```php
 AppInsights::setUserId('testuser@example.com');
 ```
-
-
 ### 發送log
 
 #### exception
