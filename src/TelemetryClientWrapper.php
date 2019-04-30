@@ -48,6 +48,7 @@ class TelemetryClientWrapper
 
         $this->client->getChannel()->SetClient(new Client);
     }
+
     /**
      * set opertator
      *
@@ -59,6 +60,18 @@ class TelemetryClientWrapper
         $this->context->getUserContext()->setId($userId);
     }
 
+    /**
+     * For request context
+     *
+     * @param string $id
+     * @param string $name
+     * @return void
+     */
+    public function setOperation(string $id, string $name)
+    {
+        $this->context->getOperationContext()->setId($id);
+        $this->context->getOperationContext()->setName($name);
+    }
     /**
      * set device locale
      *
