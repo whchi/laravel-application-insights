@@ -98,6 +98,11 @@ class TelemetryClientWrapper
         $this->context->getLocationContext()->setIp($ip);
     }
 
+    public function setUserAgent(string $userAgent)
+    {
+        $this->context->getDeviceContext()->setModel($userAgent);
+
+    }
     protected function init($initWithGuzzleHttpClient)
     {
         if (isset($this->instrumentationKey)) {
@@ -108,7 +113,8 @@ class TelemetryClientWrapper
             );
             $this->client->getContext()->setInstrumentationKey($this->instrumentationKey);
             $this->context = $this->client->getContext();
-            $this->context->getSessionContext()->setId(session_id());
+            $this->context->getSessionContext()->setId(session()->getId());
+
         } else {
             throw new InstrumentationKeyException('no instrumentationKey found');
         }

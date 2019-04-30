@@ -51,20 +51,24 @@ event(new \App\Events\AppInsightsLogEvent($appInsightsObj));
 ### use native methods
 see: [ApplicationInsights-PHP](https://github.com/Microsoft/ApplicationInsights-PHP)
 ### use wrap method
+### 設定 user agent (SHOULD)
+```php
+AppInsights::setUserAgent($request->server('HTTP_USER_AGENT'));
+```
 ### 設定 operation context (MUST)
 ```php
 AppInsights::setOperationCtx('$id', '$name');
 ```
-#### 設定ip
+#### 設定ip (SHOULD)
 ```php
 AppInsights::setIp('127.0.0.1');
 ```
-#### 設定locale
+#### 設定locale (SHOULD)
 比照 [RFC5646](https://tools.ietf.org/html/rfc5646)
 ```php
 AppInsights::setLocale('zh-TW');
 ```
-#### 設定 userId
+#### 設定 userId (SHOULD)
 ```php
 AppInsights::setUserId('testuser@example.com');
 ```
