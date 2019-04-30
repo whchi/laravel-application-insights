@@ -82,7 +82,7 @@ class TelemetryClientWrapper
      */
     public function setIp(string $ip): void
     {
-        $this->context->getLocaleContext()->setIp($ip);
+        $this->context->getLocationContext()->setIp($ip);
     }
 
     protected function init($initWithGuzzleHttpClient)
