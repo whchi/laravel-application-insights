@@ -59,6 +59,10 @@ AppInsights::setOperationCtx('operation id', 'operation name');
 ```php
 AppInsights::setDeviceInfo(string $deviceType = '裝置類型(mobile/pc...)', string $osVersion = 'default: user-agent')
 ```
+#### 設定 User-Agent (SHOULD), default: $_SERVER['HTTP_USER_AGENT']
+```php
+AppInsights::setUserAgent(string $userAgent);
+```
 #### 設定ip (SHOULD)
 ```php
 AppInsights::setIp('127.0.0.1');

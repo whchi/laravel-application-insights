@@ -53,9 +53,8 @@ class AppInsights extends TelemetryClientWrapper
     {
         try {
             $options = [];
-            $userAgent = $this->getUserAgent();
-            if ($userAgent) {
-                $options = ['User-Agent' => $userAgent];
+            if ($this->userAgent !== '') {
+                $options = ['headers' => ['User-Agent' => $this->userAgent]];
             }
             $this->client->flush($options, $this->async);
         } catch (Throwable $th) {

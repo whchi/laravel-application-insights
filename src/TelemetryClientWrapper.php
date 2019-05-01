@@ -27,6 +27,7 @@ class TelemetryClientWrapper
      */
     private $context;
 
+    protected $userAgent;
     /**
      * azure application insight rest api end point
      *
@@ -98,6 +99,10 @@ class TelemetryClientWrapper
         $this->context->getLocationContext()->setIp($ip);
     }
 
+    public function setUserAgent(string $userAgent)
+    {
+        $this->userAgent = $userAgent;
+    }
     /**
      * see source code of application-insights-php
      *
@@ -110,9 +115,7 @@ class TelemetryClientWrapper
         $deviceType = $deviceType === '' ? 'PC' : $deviceType;
         $this->context->getDeviceContext()->setType($deviceType);
 
-        $userAgent = $this->getUserAgent();
-
-        $osVersion = $osVersion === '' ? $userAgent : $osVersion;
+        $osVersion = $osVersion === '' ? $this->userAgent : $osVersion;
         $this->context->getDeviceContext()->setOsVersion($osVersion);
     }
 
@@ -127,7 +130,7 @@ class TelemetryClientWrapper
             $this->context = $this->client->getContext();
             $this->context->setInstrumentationKey($this->instrumentationKey);
             $this->context->getSessionContext()->setId(session()->getId());
-
+            $this->setUserAgent($this->getRawUserAgent());
         } else {
             throw new InstrumentationKeyException('no instrumentationKey found');
         }
@@ -153,8 +156,8 @@ class TelemetryClientWrapper
         throw new InstrumentationKeyException($instrumentationKey . 'is not a valid M$ Application Insights instrumentation key.');
     }
 
-    protected function getUserAgent(): ?string
+    protected function getRawUserAgent(): string
     {
-        return isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null;
+        return isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
     }
 }
