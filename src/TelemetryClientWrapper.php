@@ -156,7 +156,7 @@ class TelemetryClientWrapper
         throw new InstrumentationKeyException($instrumentationKey . 'is not a valid M$ Application Insights instrumentation key.');
     }
 
-    protected function getRawUserAgent(): string
+    private function getRawUserAgent(): string
     {
         return isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
     }
