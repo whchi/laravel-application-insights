@@ -51,13 +51,13 @@ event(new \App\Events\AppInsightsLogEvent($appInsightsObj));
 ### use native methods
 see: [ApplicationInsights-PHP](https://github.com/Microsoft/ApplicationInsights-PHP)
 ### use wrap method
-### 設定 user agent (SHOULD)
+### 設定 operation context (MUST if use setRequest)
 ```php
-AppInsights::setUserAgent($request->server('HTTP_USER_AGENT'));
+AppInsights::setOperationCtx('operation id', 'operation name');
 ```
-### 設定 operation context (MUST)
+#### 設定裝置資訊 (SHOULD)
 ```php
-AppInsights::setOperationCtx('$id', '$name');
+AppInsights::setDeviceInfo(string $deviceType = '裝置類型(mobile/pc...)', string $osVersion = 'default: user-agent')
 ```
 #### 設定ip (SHOULD)
 ```php

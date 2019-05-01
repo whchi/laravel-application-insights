@@ -98,11 +98,24 @@ class TelemetryClientWrapper
         $this->context->getLocationContext()->setIp($ip);
     }
 
-    public function setUserAgent(string $userAgent)
+    /**
+     * see source code of application-insights-php
+     *
+     * @param string $deviceType 'PC', 'Phone', 'Browser' ... etc, default 'PC'
+     * @param string $osVersion if not set derived from user-agent
+     * @return void
+     */
+    public function setDeviceInfo(string $deviceType = '', string $osVersion = '')
     {
-        $this->context->getDeviceContext()->setModel($userAgent);
+        $deviceType = $deviceType === '' ? 'PC' : $deviceType;
+        $this->context->getDeviceContext()->setType($deviceType);
 
+        $userAgent = $this->getUserAgent();
+
+        $osVersion = $osVersion === '' ? $userAgent : $osVersion;
+        $this->context->getDeviceContext()->setOsVersion($osVersion);
     }
+
     protected function init($initWithGuzzleHttpClient)
     {
         if (isset($this->instrumentationKey)) {
@@ -111,8 +124,8 @@ class TelemetryClientWrapper
                 new Telemetry_Context,
                 new Telemetry_Channel($this->endpointUri, $initWithGuzzleHttpClient)
             );
-            $this->client->getContext()->setInstrumentationKey($this->instrumentationKey);
             $this->context = $this->client->getContext();
+            $this->context->setInstrumentationKey($this->instrumentationKey);
             $this->context->getSessionContext()->setId(session()->getId());
 
         } else {
@@ -140,4 +153,8 @@ class TelemetryClientWrapper
         throw new InstrumentationKeyException($instrumentationKey . 'is not a valid M$ Application Insights instrumentation key.');
     }
 
+    protected function getUserAgent(): ?string
+    {
+        return isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null;
+    }
 }

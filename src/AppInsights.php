@@ -45,13 +45,19 @@ class AppInsights extends TelemetryClientWrapper
     {
         $this->async = $async;
     }
+
     /**
      * flush wrapper
      */
     public function send()
     {
         try {
-            $this->client->flush([], $this->async);
+            $options = [];
+            $userAgent = $this->getUserAgent();
+            if ($userAgent) {
+                $options = ['User-Agent' => $userAgent];
+            }
+            $this->client->flush($options, $this->async);
         } catch (Throwable $th) {
             Log::error($th->getMessage());
             throw $th;
