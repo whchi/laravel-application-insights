@@ -52,9 +52,12 @@ class AppInsights extends TelemetryClientWrapper
     public function send()
     {
         try {
-            $options = [];
+            $options = ['headers' => [
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json; charset=utf-8',
+            ]];
             if ($this->userAgent !== '') {
-                $options = ['headers' => ['User-Agent' => $this->userAgent]];
+                $options['headers'] += ['User-Agent' => $this->userAgent];
             }
             $this->client->flush($options, $this->async);
         } catch (Throwable $th) {
